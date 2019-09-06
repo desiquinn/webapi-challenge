@@ -21,66 +21,45 @@ router.use(express.json());
 // 400 description missing or more than 128 characters
 //      or notes missing
 // 200 successfull (add and return object of one action)
+// Tested Successfully !
 
 router.post('/:project_id/actions', (req, res) => {
-    const project_id = req.params.project_id;
-    const newAction = req.body
+    const {project_id} = req.params;
+    const { notes, description } = req.body
 
 
-    // if(!action.notes || !action.description || action.description.length > 128) {
-    //     res.status(400).json({message: "Please include a description with max 128 characters and/or notes"})
-    // } else {
-        helper.insert(newAction)
-            .then(action => {
-                console.log(action)
-                // projectHelp.getProjectActions(project_id)
-                //     .then(actions => {
-                //         if(actions) {
-                //             res.status(200).json(action)
-                //         } else {
-                //             res.status(404).json({message: "Project with specified id not found"});
-                //         };
-                //     })
-                //     .catch(err => {
-                //         console.log("Get Project for Actions Error:", err)
-                //         res.status(500).json({error: "Error with server while retreiving data"})
-                //     });
+    if(!notes || !description || description.length > 128) {
+        res.status(400).json({message: "Please include a description with max 128 characters and/or notes"})
+    } else {
+        helper.insert({description, notes , project_id})
+            .then(actionObj => {
+                const {project_id} = actionObj
+
+                projectHelp.getProjectActions(project_id)
+                    .then(actions => {
+                        if(actions) {
+                            res.status(200).json(actionObj)
+                        } else {
+                            res.status(404).json({message: "Project with specified id not found"});
+                        };
+                    })
+                    .catch(err => {
+                        console.log("Get Project for Actions Error:", err)
+                        res.status(500).json({error: "Error with server while retreiving data"})
+                    });
+
+
             })
             .catch(err => {
                 console.log("Add Action to Project Error:", err)
                 res.status(500).json({error: "Error with server while adding data"})
             });
-    // };
-
-    // if(!action.notes || !action.description || action.description.length > 128) {
-    //     res.status(400).json({message: "Please include a description with max 128 characters and/or notes"})
-    // } else {
-    // projectHelp.get(id)
-    //     .then(project => {
-    //         if(project) {
-    //             helper.insert(action)
-    //                 .then(action => {
-    //                     res.status(200).json(action)
-    //                 })
-    //                 .catch(err => {
-    //                     console.log("Add Action to Project Error:", err)
-    //                     res.status(500).json({error: "Error with server while adding data"})
-    //                 })
-    //         } else {
-    //             res.status(404).json({message: "Project with specified id not found"});
-    //         };
-    //     })
-    //     .catch(err => {
-    //         console.log("Get Project for Actions Error:", err)
-    //         res.status(500).json({error: "Error with server while retreiving data"})
-    //     });
-    // };
+    };
 });
 
 
 // PUT to /api/projects/:project_id/actions/:action_id
 // 500 error
-// 404 Project with id not found
 // 404 Actions with id not found
 // 400 description missing or more than 128 characters
 //      or notes missing
