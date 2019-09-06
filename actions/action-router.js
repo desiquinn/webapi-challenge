@@ -1,4 +1,7 @@
+const express = require('express');
 
+const router = express();
+router.use(express.json());
 
 
 
@@ -43,3 +46,5 @@
 // validate project_id
 // validate description and notes
 // validate action_id
+
+module.exports = router;
