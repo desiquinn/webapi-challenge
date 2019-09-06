@@ -40,7 +40,7 @@ router.post('/', (req, res) => {
     const name = req.body.name;
     const description = req.body.description;
 
-    if(!name || !description || description.length > 128) {
+    if(!name || !description) {
         res.status(400).json({message: "Please include a name or a description with maximum 128 characters"})
     } else {
         helper.insert(project)
@@ -88,7 +88,7 @@ router.put('/:id', (req, res) => {
     const id = req.params.id;
     const edit = req.body;
 
-    if(!edit.name || !edit.description || edit.description.length > 128){
+    if(!edit.name || !edit.description){
         res.status(400).json({message: "Please include a name or a description with maximum 128 characters"})
     } else {
     helper.update(id, edit)
@@ -110,6 +110,7 @@ router.put('/:id', (req, res) => {
 // 404 project with id not found
 // 500 error
 // 200 successfull (delete and return number of records deleted)
+// Tested Succesfully!
 
 router.delete('/:id', (req, res) => {
     const id = req.params.id;
@@ -125,6 +126,25 @@ router.delete('/:id', (req, res) => {
         .catch(err => {
             console.log("Delete Project Error:", err);
             res.status(500).json({ error: "Error with server while removing data" })
+        });
+});
+
+// GET to /api/projects/:project_id/actions
+// 500 error
+// 404 Project with id not found
+// 200 successfull (return array of all actions for project_id)
+// Tested Successfully!
+
+router.get('/:project_id/actions', (req, res) => {
+    const project_id = req.params.project_id
+    
+    helper.getProjectActions(project_id)
+        .then(actions => {
+            res.status(200).json(actions);
+        })
+        .catch(err => {
+            console.log("Get Actions Error:", err)
+            res.status(500).json({message: "Error with server while retrieving data"})
         });
 });
 

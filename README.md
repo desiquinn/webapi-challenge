@@ -90,10 +90,7 @@ Design and build the necessary endpoints to:
 
 The _schemas_ (properties and data type of each property) used to store and retrieve the resources inside the included database (`lambda.sqlite3`) is described below.
 
-#### Projects
-
-| Field       | Data Type | Metadata                                                                    |
-| ----------- | --------- | --------------------------------------------------------------------------- |
+#### ProjectsPr| ----------- | --------- | --------------------------------------------------------------------------- |
 | id          | number    | no need to provide it when creating projects, the database will generate it |
 | name        | string    | required.                                                                   |
 | description | string    | required.                                                                   |

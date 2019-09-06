@@ -13,7 +13,7 @@ server.get('/', (req, res) => {
 // Project Router
 server.use('/api/projects', projectRouter)
 // Action Router
-server.use('/api/projects/:project_id/actions', actionRouter)
+server.use('/api/projects', actionRouter)
 
 //logger middleware
 
