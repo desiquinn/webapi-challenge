@@ -26,13 +26,23 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
+* Ans: Two parts of express that i learned about this week are Middleware and Routing
+
 - [ ] Describe Middleware?
+
+* Ans: Middleware is a function that takes in our request and response and does something to it, whether it is validation, logging, or to change it in some way.  It can also call the next Middleware in line.
 
 - [ ] Describe a Resource?
 
+* Ans: Resources are the objects, that contain the essential data, with which we use the GET, POST, PUT, and DELETE methods on.
+
 - [ ] What can the API return to help clients know if a request was successful?
 
+* Ans: The API can return a 200 status and the body of the response, or a success message.
+
 - [ ] How can we partition our application into sub-applications?
+
+* Ans: We can split it up into components, routers, and mini databases. Also have our server split from the index.js
 
 ## Project Setup
 
@@ -68,8 +78,8 @@ The `projectModel.js` helper includes an extra method called `getProjectActions(
 
 ## Minimum Viable Product
 
-- [ ] Configure an _npm script_ named _"server"_ that will execute your code using _nodemon_. Make _nodemon_ be a development time dependency only, it shouldn't be deployed to production.
-- [ ] Configure an _npm script_ named _"start"_ that will execute your code using _node_.
+- [/] Configure an _npm script_ named _"server"_ that will execute your code using _nodemon_. Make _nodemon_ be a development time dependency only, it shouldn't be deployed to production.
+- [/] Configure an _npm script_ named _"start"_ that will execute your code using _node_.
 
 Design and build the necessary endpoints to:
 
@@ -80,10 +90,7 @@ Design and build the necessary endpoints to:
 
 The _schemas_ (properties and data type of each property) used to store and retrieve the resources inside the included database (`lambda.sqlite3`) is described below.
 
-#### Projects
-
-| Field       | Data Type | Metadata                                                                    |
-| ----------- | --------- | --------------------------------------------------------------------------- |
+#### ProjectsPr| ----------- | --------- | --------------------------------------------------------------------------- |
 | id          | number    | no need to provide it when creating projects, the database will generate it |
 | name        | string    | required.                                                                   |
 | description | string    | required.                                                                   |
